@@ -12,15 +12,20 @@ public class GameController : MonoBehaviour {
 	public KeyCode rightKey;
 	public Rigidbody2D rb2d;
 	public float mSpeed = 8;
-
+	public float spawnTime = 1f;
 
 	public GameObject wallPrefab;
+	public GameObject otherPlayer;
+	public GameObject powerUp;
+	public GameObject[] powerUps;
 	public Text gameOverText;
 	public Text restartText;
 	public bool gameOver = false;
 	public bool restart = false;
 	public bool pause=false;
-	public GameObject otherPlayer;
+
+	//public Transform[] spawnPoints;
+
 
 
 	// Use this for initialization
@@ -32,6 +37,8 @@ public class GameController : MonoBehaviour {
 		restart = false;
 		gameOverText.text = "";
 		restartText.text = "";
+		Transform[] spawnPoints = new Transform[10];
+		InvokeRepeating("SpawnPowerUp", spawnTime, spawnTime);
 		
 	}
 	
@@ -76,7 +83,7 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	void SpawnWall()
+	public void SpawnWall()
 	{	
 		GameObject g = GameObject.Instantiate(wallPrefab, transform.position, Quaternion.identity);
 		Collider2D wall = g.GetComponent<Collider2D>();
@@ -95,5 +102,23 @@ public class GameController : MonoBehaviour {
 	{
 		pause = true;
 		rb2d.velocity = Vector2.zero;
+	}
+
+	public void PowerUp()
+	{
+		mSpeed = mSpeed * 2;
+	}
+
+	public void SpawnPowerUp()
+	{
+		powerUps = GameObject.FindGameObjectsWithTag("Powerup"); 
+		if(powerUps.Length < 1)
+		{
+
+			Vector3 position = new Vector3(Random.Range(-35.0f, 35.0f), 0, Random.Range(-35.0f, 35.0f));
+			Instantiate(powerUp, position, transform.rotation);
+
+		}
+
 	}
 }

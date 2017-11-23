@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: 6fa2e9d3a9a6eaa40a29752114491498
-timeCreated: 1510821088
+timeCreated: 1511430167
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rb2d: {instanceID: 0}
+  - wallPrefab: {instanceID: 0}
+  - otherPlayer: {instanceID: 0}
+  - powerUp: {fileID: 1654673039553190, guid: f3071ab504584eb49bc28a5d649ac6a6, type: 2}
+  - gameOverText: {instanceID: 0}
+  - restartText: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

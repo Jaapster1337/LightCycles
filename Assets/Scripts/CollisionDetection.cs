@@ -20,14 +20,17 @@ public class CollisionDetection : MonoBehaviour {
 	}
 		
 	void OnTriggerEnter2D(Collider2D other){		
-		if(other.gameObject.tag != gameObject.tag)
+		if(other.gameObject.tag == "PowerUp")
 		{			
 			gc.GameOver();
 		}
-
-		if (other.gameObject.tag == "Boundary")
+		else if (other.gameObject.tag == "Boundary")
 		{			
 			gc.GameOver();
+		}
+		else if(other.gameObject.tag != gameObject.tag)
+		{
+			gc.PowerUp();
 		}
 	}
 }

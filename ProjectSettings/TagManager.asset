@@ -8,6 +8,7 @@ TagManager:
   - Wallpink
   - Wallcyan
   - Boundary
+  - Powerup
   layers:
   - Default
   - TransparentFX
