@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour {
 	public GameObject[] powerUps;
 	public Text gameOverText;
 	public Text restartText;
+	public Text quitText;
 	public bool gameOver = false;
 	public bool restart = false;
 	public bool pause=false;
@@ -37,13 +38,18 @@ public class GameController : MonoBehaviour {
 		restart = false;
 		gameOverText.text = "";
 		restartText.text = "";
-		Transform[] spawnPoints = new Transform[10];
+		quitText.text = "";
 		InvokeRepeating("SpawnPowerUp", 10f, 10f);
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(Input.GetKey(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
 
 		if(gameOver)
 		{
@@ -93,6 +99,7 @@ public class GameController : MonoBehaviour {
 	{
 		gameOverText.text = "Game Over";
 		restartText.text = "Press any key to restart!";
+		quitText.text = "Esc to quit";
 		rb2d.velocity = Vector2.zero;
 		otherPlayer.GetComponent<GameController>().Pause();
 		gameOver = true;
@@ -118,9 +125,8 @@ public class GameController : MonoBehaviour {
 			Vector2 position = new Vector2(Random.Range(-35.0f, 35.0f), Random.Range(-35.0f, 35.0f));
 			Collider2D hit = Physics2D.OverlapPoint(position);
 			if(hit == null)
-			{
 				Instantiate(powerUp, position, transform.rotation);
-			}
+			
 
 		}
 
