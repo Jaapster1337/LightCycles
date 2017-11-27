@@ -11,8 +11,8 @@ public class GameController : MonoBehaviour {
 	public KeyCode leftKey;
 	public KeyCode rightKey;
 	public Rigidbody2D rb2d;
-	public float mSpeed = 8;
-	public float spawnTime = 1f;
+	public float mSpeed = 12;
+	//public float spawnTime = 100f;
 
 	public GameObject wallPrefab;
 	public GameObject otherPlayer;
@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour {
 		gameOverText.text = "";
 		restartText.text = "";
 		Transform[] spawnPoints = new Transform[10];
-		InvokeRepeating("SpawnPowerUp", spawnTime, spawnTime);
+		InvokeRepeating("SpawnPowerUp", 10f, 10f);
 		
 	}
 	
@@ -115,8 +115,12 @@ public class GameController : MonoBehaviour {
 		if(powerUps.Length < 1)
 		{
 
-			Vector3 position = new Vector3(Random.Range(-35.0f, 35.0f), 0, Random.Range(-35.0f, 35.0f));
-			Instantiate(powerUp, position, transform.rotation);
+			Vector2 position = new Vector2(Random.Range(-35.0f, 35.0f), Random.Range(-35.0f, 35.0f));
+			Collider2D hit = Physics2D.OverlapPoint(position);
+			if(hit == null)
+			{
+				Instantiate(powerUp, position, transform.rotation);
+			}
 
 		}
 
