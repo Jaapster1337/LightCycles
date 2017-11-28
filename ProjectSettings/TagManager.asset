@@ -9,6 +9,7 @@ TagManager:
   - Wallcyan
   - Boundary
   - Powerup
+  - Btop
   layers:
   - Default
   - TransparentFX

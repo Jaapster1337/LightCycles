@@ -26,8 +26,17 @@ public class CollisionDetection : MonoBehaviour {
 			Destroy(other.gameObject);
 		}
 		else if (other.gameObject.tag == "Boundary")
-		{			
-			gc.GameOver();
+		{		
+			
+			if(transform.localEulerAngles.z == 0)
+			{
+				transform.position = new Vector3(transform.position.x,-80.0f,0.0f);
+				transform.Translate(Vector2.up * gc.mSpeed);
+			}
+			print(transform.localEulerAngles.z);
+
+			//gc.setAtOppositeBoundary();
+
 		}
 		else if(other.gameObject.tag != gameObject.tag)
 		{

@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbfaa88273d6cd14bbb34cb3bb0318d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 7
+  lifetime: 5
   wallColTimer: 0.1
   timer: 0
 --- !u!212 &212080020381765618
