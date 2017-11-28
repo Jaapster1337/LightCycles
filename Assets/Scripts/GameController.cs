@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
 	public KeyCode leftKey;
 	public KeyCode rightKey;
 	public Rigidbody2D rb2d;
-	public float mSpeed = 12;
+	public float mSpeed = 32;
 	//public float spawnTime = 100f;
 
 	public GameObject wallPrefab;
@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour {
 	public bool gameOver = false;
 	public bool restart = false;
 	public bool pause=false;
+
 
 	public GameObject btop;
 	public GameObject bbot;
@@ -39,7 +40,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		
 		rb2d = GetComponent<Rigidbody2D>();
-		rb2d.velocity = Vector2.up * mSpeed;
+		rb2d.velocity = Vector2.down * mSpeed;
 		gameOver = false;
 		restart = false;
 		gameOverText.text = "";
@@ -80,6 +81,11 @@ public class GameController : MonoBehaviour {
 				rb2d.velocity = Vector2.up * mSpeed;
 				rb2d.MoveRotation(0);
 			} 
+			else if(Input.GetKeyDown(leftKey))
+			{
+				rb2d.velocity = Vector2.left * mSpeed;
+				rb2d.MoveRotation(90);
+			}
 			else if(Input.GetKeyDown(downKey))
 			{
 				rb2d.velocity = Vector2.down * mSpeed;
@@ -91,11 +97,7 @@ public class GameController : MonoBehaviour {
 				rb2d.MoveRotation(270);
 
 			} 
-			else if(Input.GetKeyDown(leftKey))
-			{
-				rb2d.velocity = Vector2.left * mSpeed;
-				rb2d.MoveRotation(90);
-			}
+
 		}
 	}
 
@@ -141,27 +143,27 @@ public class GameController : MonoBehaviour {
 		}
 
 	}
-	public void setAtOppositeBoundary(int rotation)
+	public void setAtOppositeBoundary(float rotation)  //x y z /y = vertical /x = horizontal
 	{
-		if(transform.localEulerAngles.z == 0)//direction up
+		if(transform.localEulerAngles.z == 0)//if direction up
 		{
 			transform.position = new Vector3(transform.position.x,-80.0f,0.0f);//keep x set y
 			transform.Translate(Vector2.up * mSpeed);//give speed with direction
 		} 
-		if(transform.localEulerAngles.z == 90)//direction left
+		if(transform.localEulerAngles.z == 90)//if direction left
 		{
-			transform.position = new Vector3(-80.0f,transform.position.y,0.0f);//set x keep y
-			transform.Translate(Vector2.right * mSpeed);//give speed with direction
+			transform.position = new Vector3(64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
+			transform.Translate(Vector2.left * mSpeed);//give speed with direction
 		}
 		if(transform.localEulerAngles.z == 180)//direction down
 		{
-			transform.position = new Vector3(transform.position.x,80.0f,0.0f);//keep x set y
-			transform.Translate(Vector2.down * mSpeed);//give speed with direction
+			transform.position = new Vector3(transform.position.x,48.0f,0.0f);//keep x set y
+			transform.Translate(Vector2.down * mSpeed);//give speed with direction);
 		}
 		if(transform.localEulerAngles.z == 270)//direction right
 		{
-			transform.position = new Vector3(80.0f,transform.position.y,0.0f);//set x keep y
-			transform.Translate(Vector2.left * mSpeed);//give speed with direction
+			transform.position = new Vector3(-64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
+			transform.Translate(Vector2.right * mSpeed);//give speed with direction
 		}
 
 	

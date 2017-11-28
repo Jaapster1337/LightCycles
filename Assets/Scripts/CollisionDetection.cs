@@ -14,31 +14,22 @@ public class CollisionDetection : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-//		
 
 	}
 		
-	void OnTriggerEnter2D(Collider2D other){		
-		if(other.gameObject.tag == "Powerup")
+	void OnTriggerEnter2D(Collider2D other){
+		if(other.gameObject.tag == "Boundary")
+		{		
+			float rotation = transform.localEulerAngles.z;
+			gc.setAtOppositeBoundary(rotation);
+		}
+		 if(other.gameObject.tag == "Powerup")
 		{			
 			gc.PowerUp();
 			Destroy(other.gameObject);
 		}
-		else if (other.gameObject.tag == "Boundary")
-		{		
-			
-			if(transform.localEulerAngles.z == 0)
-			{
-				transform.position = new Vector3(transform.position.x,-80.0f,0.0f);
-				transform.Translate(Vector2.up * gc.mSpeed);
-			}
-			print(transform.localEulerAngles.z);
 
-			//gc.setAtOppositeBoundary();
-
-		}
-		else if(other.gameObject.tag != gameObject.tag)
+		if(other.gameObject.tag == "Player" || other.gameObject.tag =="Player2")
 		{
 			gc.GameOver();
 		}
