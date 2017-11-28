@@ -10,6 +10,7 @@ TagManager:
   - Boundary
   - Powerup
   - Btop
+  - Playerwall
   layers:
   - Default
   - TransparentFX

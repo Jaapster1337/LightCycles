@@ -8,23 +8,24 @@ public class DestroyByTime : MonoBehaviour {
 	public float lifetime;
 	public float wallColTimer;
 	public float timer;
-	private bool isActive;
+	public bool isActive;
+	private GameController gc;
 
 	void Start () {
 
 		Destroy (gameObject, lifetime);
 		timer = 0.0f;
 		isActive = false;
+		gc = GameObject.FindGameObjectWithTag("Player").GetComponent<GameController>();
 	}
 
 	void Update()
 	{
-		if(!isActive)
+		if(!isActive && !gc.pause)
 		{
 			if(timer >= wallColTimer)
 			{
 				isActive = true;
-				gameObject.tag = "Boundary";
 			} 
 			else
 			{

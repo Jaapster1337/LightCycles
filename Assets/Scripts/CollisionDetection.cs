@@ -18,6 +18,7 @@ public class CollisionDetection : MonoBehaviour {
 	}
 		
 	void OnTriggerEnter2D(Collider2D other){
+		//print(other.name +" "+ gameObject.name);
 		if(other.gameObject.tag == "Boundary")
 		{		
 			float rotation = transform.localEulerAngles.z;
@@ -29,7 +30,7 @@ public class CollisionDetection : MonoBehaviour {
 			Destroy(other.gameObject);
 		}
 
-		if(other.gameObject.tag == "Player" || other.gameObject.tag =="Player2")
+		if(other.gameObject.tag == "Playerwall" && other.gameObject.GetComponent<DestroyByTime>().isActive)
 		{
 			gc.GameOver();
 		}

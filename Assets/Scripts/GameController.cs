@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
 	public KeyCode rightKey;
 	public Rigidbody2D rb2d;
 	public float mSpeed = 32;
-	//public float spawnTime = 100f;
+
 
 	public GameObject wallPrefab;
 	public GameObject otherPlayer;
@@ -25,20 +25,9 @@ public class GameController : MonoBehaviour {
 	public bool restart = false;
 	public bool pause=false;
 
-
-	public GameObject btop;
-	public GameObject bbot;
-	public GameObject blef;
-	public GameObject brig;	
-
-
-	//public Transform[] spawnPoints;
-
-
-
 	// Use this for initialization
 	void Start () {
-		
+		transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,transform.localEulerAngles.y,180f);
 		rb2d = GetComponent<Rigidbody2D>();
 		rb2d.velocity = Vector2.down * mSpeed;
 		gameOver = false;
@@ -47,10 +36,7 @@ public class GameController : MonoBehaviour {
 		restartText.text = "";
 		quitText.text = "";
 		InvokeRepeating("SpawnPowerUp", 10f, 10f);
-		btop = GameObject.Find("BTop");
-		bbot = GameObject.Find("BBot");
-		blef = GameObject.Find("BLef");
-		brig = GameObject.Find("BRig");
+//		
 		
 	}
 	
