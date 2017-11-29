@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
-	public KeyCode upKey;
-	public KeyCode downKey;
-	public KeyCode leftKey;
-	public KeyCode rightKey;
-	public Rigidbody2D rb2d;
-	public float mSpeed = 32;
+	//public KeyCode upKey;
+	//public KeyCode downKey;
+	//public KeyCode leftKey;
+	//public KeyCode rightKey;
+	//public Rigidbody2D rb2d;
+	//public float mSpeed = 32;
 
 
 	public GameObject wallPrefab;
@@ -24,24 +24,28 @@ public class GameController : MonoBehaviour {
 	public bool gameOver = false;
 	public bool restart = false;
 	public bool pause=false;
+	Mover mv;
 
 	// Use this for initialization
 	void Start () {
+		mv = gameObject.GetComponent<Mover>();
+		mv.rb2d = GetComponent<Rigidbody2D>();
 		transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,transform.localEulerAngles.y,180f);
-		rb2d = GetComponent<Rigidbody2D>();
-		rb2d.velocity = Vector2.down * mSpeed;
+		mv.rb2d.velocity = Vector2.down * mv.mSpeed;
 		gameOver = false;
 		restart = false;
 		gameOverText.text = "";
 		restartText.text = "";
 		quitText.text = "";
 		InvokeRepeating("SpawnPowerUp", 10f, 10f);
+
 //		
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		mv.Move();
 
 		if(Input.GetKey(KeyCode.Escape))
 		{
@@ -62,27 +66,28 @@ public class GameController : MonoBehaviour {
 		{
 
 			SpawnWall();
-			if(Input.GetKeyDown(upKey))
-			{
-				rb2d.velocity = Vector2.up * mSpeed;
-				rb2d.MoveRotation(0);
-			} 
-			else if(Input.GetKeyDown(leftKey))
-			{
-				rb2d.velocity = Vector2.left * mSpeed;
-				rb2d.MoveRotation(90);
-			}
-			else if(Input.GetKeyDown(downKey))
-			{
-				rb2d.velocity = Vector2.down * mSpeed;
-				rb2d.MoveRotation(180);
-			} 
-			else if(Input.GetKeyDown(rightKey))
-			{
-				rb2d.velocity = Vector2.right * mSpeed;
-				rb2d.MoveRotation(270);
 
-			} 
+//			if(Input.GetKeyDown(mv.upKey))
+//			{
+//				mv.rb2d.velocity = Vector2.up *mv.mSpeed;
+//				mv.rb2d.MoveRotation(0);
+//			} 
+//			else if(Input.GetKeyDown(mv.leftKey))
+//			{
+//				mv.rb2d.velocity = Vector2.left * mv.mSpeed;
+//				mv.rb2d.MoveRotation(90);
+//			}
+//			else if(Input.GetKeyDown(mv.downKey))
+//			{
+//				mv.rb2d.velocity = Vector2.down * mv.mSpeed;
+//				mv.rb2d.MoveRotation(180);
+//			} 
+//			else if(Input.GetKeyDown(mv.rightKey))
+//			{
+//				mv.rb2d.velocity = Vector2.right * mv.mSpeed;
+//				mv.rb2d.MoveRotation(270);
+//
+//			} 
 
 		}
 	}
@@ -98,7 +103,7 @@ public class GameController : MonoBehaviour {
 		gameOverText.text = "Game Over";
 		restartText.text = "Press any key to restart!";
 		quitText.text = "Esc to quit";
-		rb2d.velocity = Vector2.zero;
+		mv.rb2d.velocity = Vector2.zero;
 		otherPlayer.GetComponent<GameController>().Pause();
 		gameOver = true;
 	}
@@ -106,12 +111,12 @@ public class GameController : MonoBehaviour {
 	public void Pause()
 	{
 		pause = true;
-		rb2d.velocity = Vector2.zero;
+		mv.rb2d.velocity = Vector2.zero;
 	}
 
 	public void PowerUp()
 	{
-		mSpeed = mSpeed * 2;
+		mv.mSpeed = mv.mSpeed * 2;
 	}
 
 	public void SpawnPowerUp()
@@ -129,27 +134,27 @@ public class GameController : MonoBehaviour {
 		}
 
 	}
-	public void setAtOppositeBoundary(float rotation)  //x y z /y = vertical /x = horizontal
+	public void SetAtOppositeBoundary(float rotation)  //x y z /y = vertical /x = horizontal
 	{
 		if(transform.localEulerAngles.z == 0)//if direction up
 		{
 			transform.position = new Vector3(transform.position.x,-80.0f,0.0f);//keep x set y
-			transform.Translate(Vector2.up * mSpeed);//give speed with direction
+			transform.Translate(Vector2.up * mv.mSpeed);//give speed with direction
 		} 
 		if(transform.localEulerAngles.z == 90)//if direction left
 		{
 			transform.position = new Vector3(64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
-			transform.Translate(Vector2.left * mSpeed);//give speed with direction
+			transform.Translate(Vector2.left * mv.mSpeed);//give speed with direction
 		}
 		if(transform.localEulerAngles.z == 180)//direction down
 		{
 			transform.position = new Vector3(transform.position.x,48.0f,0.0f);//keep x set y
-			transform.Translate(Vector2.down * mSpeed);//give speed with direction);
+			transform.Translate(Vector2.down * mv.mSpeed);//give speed with direction);
 		}
 		if(transform.localEulerAngles.z == 270)//direction right
 		{
 			transform.position = new Vector3(-64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
-			transform.Translate(Vector2.right * mSpeed);//give speed with direction
+			transform.Translate(Vector2.right * mv.mSpeed);//give speed with direction
 		}
 
 	

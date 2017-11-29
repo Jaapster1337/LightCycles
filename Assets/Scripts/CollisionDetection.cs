@@ -22,7 +22,7 @@ public class CollisionDetection : MonoBehaviour {
 		if(other.gameObject.tag == "Boundary")
 		{		
 			float rotation = transform.localEulerAngles.z;
-			gc.setAtOppositeBoundary(rotation);
+			gc.SetAtOppositeBoundary(rotation);
 		}
 		 if(other.gameObject.tag == "Powerup")
 		{			
