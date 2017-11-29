@@ -44,4 +44,28 @@ public class Mover : MonoBehaviour {
 		} 
 
 	}
+
+	public void SetAtOppositeBoundary(float rotation)  //x y z /y = vertical /x = horizontal
+	{
+		if(transform.localEulerAngles.z == 0)//if direction up
+		{
+			transform.position = new Vector3(transform.position.x,-80.0f,0.0f);//keep x set y
+			transform.Translate(Vector2.up * mSpeed);//give speed with direction
+		} 
+		if(transform.localEulerAngles.z == 90)//if direction left
+		{
+			transform.position = new Vector3(64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
+			transform.Translate(Vector2.left * mSpeed);//give speed with direction
+		}
+		if(transform.localEulerAngles.z == 180)//direction down
+		{
+			transform.position = new Vector3(transform.position.x,48.0f,0.0f);//keep x set y
+			transform.Translate(Vector2.down * mSpeed);//give speed with direction);
+		}
+		if(transform.localEulerAngles.z == 270)//direction right
+		{
+			transform.position = new Vector3(-64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
+			transform.Translate(Vector2.right * mSpeed);//give speed with direction
+		}
+}
 }

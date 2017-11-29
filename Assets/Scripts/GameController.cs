@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour {
 	Mover mv;
 	PlayerController pc;
 	public GameObject powerUp;
-	public GameObject[] powerUps;
+	private GameObject[] powerUps;
 	public Text gameOverText;
 	public Text restartText;
 	public Text quitText;
@@ -31,9 +31,7 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		mv = gameObject.GetComponent<Mover>();
 		pc = gameObject.GetComponent<PlayerController>();
-		//mv.rb2d = GetComponent<Rigidbody2D>();
 		transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,transform.localEulerAngles.y,180f);
-		//mv.rb2d.velocity = Vector2.down * mv.mSpeed;
 		gameOver = false;
 		restart = false;
 		gameOverText.text = "";
@@ -47,8 +45,7 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//mv.Move();
-
+		mv.Move();
 		if(Input.GetKey(KeyCode.Escape))
 		{
 			Application.Quit();
@@ -66,7 +63,7 @@ public class GameController : MonoBehaviour {
 		}
 		else if(!pause)
 		{
-			pc.SpawnWall();
+			//pc.SpawnWall();
 		}
 	}
 
@@ -106,29 +103,27 @@ public class GameController : MonoBehaviour {
 		}
 
 	}
-	public void SetAtOppositeBoundary(float rotation)  //x y z /y = vertical /x = horizontal
-	{
-		if(transform.localEulerAngles.z == 0)//if direction up
-		{
-			transform.position = new Vector3(transform.position.x,-80.0f,0.0f);//keep x set y
-			transform.Translate(Vector2.up * mv.mSpeed);//give speed with direction
-		} 
-		if(transform.localEulerAngles.z == 90)//if direction left
-		{
-			transform.position = new Vector3(64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
-			transform.Translate(Vector2.left * mv.mSpeed);//give speed with direction
-		}
-		if(transform.localEulerAngles.z == 180)//direction down
-		{
-			transform.position = new Vector3(transform.position.x,48.0f,0.0f);//keep x set y
-			transform.Translate(Vector2.down * mv.mSpeed);//give speed with direction);
-		}
-		if(transform.localEulerAngles.z == 270)//direction right
-		{
-			transform.position = new Vector3(-64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
-			transform.Translate(Vector2.right * mv.mSpeed);//give speed with direction
-		}
-
-	
-	}
+//	public void SetAtOppositeBoundary(float rotation)  //x y z /y = vertical /x = horizontal
+//	{
+//		if(transform.localEulerAngles.z == 0)//if direction up
+//		{
+//			transform.position = new Vector3(transform.position.x,-80.0f,0.0f);//keep x set y
+//			transform.Translate(Vector2.up * mv.mSpeed);//give speed with direction
+//		} 
+//		if(transform.localEulerAngles.z == 90)//if direction left
+//		{
+//			transform.position = new Vector3(64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
+//			transform.Translate(Vector2.left * mv.mSpeed);//give speed with direction
+//		}
+//		if(transform.localEulerAngles.z == 180)//direction down
+//		{
+//			transform.position = new Vector3(transform.position.x,48.0f,0.0f);//keep x set y
+//			transform.Translate(Vector2.down * mv.mSpeed);//give speed with direction);
+//		}
+//		if(transform.localEulerAngles.z == 270)//direction right
+//		{
+//			transform.position = new Vector3(-64.0f,transform.position.y + 16.0f,0.0f);//set x keep y
+//			transform.Translate(Vector2.right * mv.mSpeed);//give speed with direction
+//		}
+//	}
 }

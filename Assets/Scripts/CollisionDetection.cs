@@ -6,10 +6,12 @@ public class CollisionDetection : MonoBehaviour {
 
 	//private GameController gameController;
 	GameController gc;
+	Mover mv;
 
 	// Use this for initialization
 	void Start () {
 		gc = gameObject.GetComponent<GameController>();
+		mv = gameObject.GetComponent<Mover>();
 	}
 
 	// Update is called once per frame
@@ -22,7 +24,7 @@ public class CollisionDetection : MonoBehaviour {
 		if(other.gameObject.tag == "Boundary")
 		{		
 			float rotation = transform.localEulerAngles.z;
-			gc.SetAtOppositeBoundary(rotation);
+			mv.SetAtOppositeBoundary(rotation);
 		}
 		 if(other.gameObject.tag == "Powerup")
 		{			
