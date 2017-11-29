@@ -10,15 +10,18 @@ public class Mover : MonoBehaviour {
 	public KeyCode rightKey;
 	public Rigidbody2D rb2d;
 	public float mSpeed = 32;
+	PlayerController pc;
 
 	// Use this for initialization
 	void Start () {
-		
+		pc = gameObject.GetComponent<PlayerController>();
+		rb2d = GetComponent<Rigidbody2D>();
+		rb2d.velocity = Vector2.down * mSpeed;
 	}
 	
 	// Update is called once per frame
 	public void Move() {
-		
+		pc.SpawnWall();
 		if(Input.GetKeyDown(upKey))
 		{
 			rb2d.velocity = Vector2.up * mSpeed;

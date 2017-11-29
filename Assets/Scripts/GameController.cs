@@ -12,10 +12,11 @@ public class GameController : MonoBehaviour {
 	//public KeyCode rightKey;
 	//public Rigidbody2D rb2d;
 	//public float mSpeed = 32;
+	//public GameObject wallPrefab;
+	//public GameObject otherPlayer;
 
-
-	public GameObject wallPrefab;
-	public GameObject otherPlayer;
+	Mover mv;
+	PlayerController pc;
 	public GameObject powerUp;
 	public GameObject[] powerUps;
 	public Text gameOverText;
@@ -24,14 +25,15 @@ public class GameController : MonoBehaviour {
 	public bool gameOver = false;
 	public bool restart = false;
 	public bool pause=false;
-	Mover mv;
+
 
 	// Use this for initialization
 	void Start () {
 		mv = gameObject.GetComponent<Mover>();
-		mv.rb2d = GetComponent<Rigidbody2D>();
+		pc = gameObject.GetComponent<PlayerController>();
+		//mv.rb2d = GetComponent<Rigidbody2D>();
 		transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,transform.localEulerAngles.y,180f);
-		mv.rb2d.velocity = Vector2.down * mv.mSpeed;
+		//mv.rb2d.velocity = Vector2.down * mv.mSpeed;
 		gameOver = false;
 		restart = false;
 		gameOverText.text = "";
@@ -45,7 +47,7 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		mv.Move();
+		//mv.Move();
 
 		if(Input.GetKey(KeyCode.Escape))
 		{
@@ -64,38 +66,8 @@ public class GameController : MonoBehaviour {
 		}
 		else if(!pause)
 		{
-
-			SpawnWall();
-
-//			if(Input.GetKeyDown(mv.upKey))
-//			{
-//				mv.rb2d.velocity = Vector2.up *mv.mSpeed;
-//				mv.rb2d.MoveRotation(0);
-//			} 
-//			else if(Input.GetKeyDown(mv.leftKey))
-//			{
-//				mv.rb2d.velocity = Vector2.left * mv.mSpeed;
-//				mv.rb2d.MoveRotation(90);
-//			}
-//			else if(Input.GetKeyDown(mv.downKey))
-//			{
-//				mv.rb2d.velocity = Vector2.down * mv.mSpeed;
-//				mv.rb2d.MoveRotation(180);
-//			} 
-//			else if(Input.GetKeyDown(mv.rightKey))
-//			{
-//				mv.rb2d.velocity = Vector2.right * mv.mSpeed;
-//				mv.rb2d.MoveRotation(270);
-//
-//			} 
-
+			pc.SpawnWall();
 		}
-	}
-
-	public void SpawnWall()
-	{	
-		GameObject g = GameObject.Instantiate(wallPrefab, transform.position, Quaternion.identity);
-		Collider2D wall = g.GetComponent<Collider2D>();
 	}
 
 	public void GameOver()
@@ -104,7 +76,7 @@ public class GameController : MonoBehaviour {
 		restartText.text = "Press any key to restart!";
 		quitText.text = "Esc to quit";
 		mv.rb2d.velocity = Vector2.zero;
-		otherPlayer.GetComponent<GameController>().Pause();
+		pc.otherPlayer.GetComponent<GameController>().Pause();
 		gameOver = true;
 	}
 
