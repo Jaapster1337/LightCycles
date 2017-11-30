@@ -25,11 +25,13 @@ public class GameController : MonoBehaviour {
 	public bool restart = false;
 	public bool pause=false;
 	Mover mv;
+	SoundController sc;
 
 	// Use this for initialization
 	void Start () {
 		mv = gameObject.GetComponent<Mover>();
 		mv.rb2d = GetComponent<Rigidbody2D>();
+		sc = gameObject.GetComponent<SoundController>();
 		transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,transform.localEulerAngles.y,180f);
 		mv.rb2d.velocity = Vector2.down * mv.mSpeed;
 		gameOver = false;
@@ -37,9 +39,7 @@ public class GameController : MonoBehaviour {
 		gameOverText.text = "";
 		restartText.text = "";
 		quitText.text = "";
-		InvokeRepeating("SpawnPowerUp", 10f, 10f);
-
-//		
+		InvokeRepeating("SpawnPowerUp", 10f, 10f);		
 		
 	}
 	
@@ -67,28 +67,6 @@ public class GameController : MonoBehaviour {
 
 			SpawnWall();
 
-//			if(Input.GetKeyDown(mv.upKey))
-//			{
-//				mv.rb2d.velocity = Vector2.up *mv.mSpeed;
-//				mv.rb2d.MoveRotation(0);
-//			} 
-//			else if(Input.GetKeyDown(mv.leftKey))
-//			{
-//				mv.rb2d.velocity = Vector2.left * mv.mSpeed;
-//				mv.rb2d.MoveRotation(90);
-//			}
-//			else if(Input.GetKeyDown(mv.downKey))
-//			{
-//				mv.rb2d.velocity = Vector2.down * mv.mSpeed;
-//				mv.rb2d.MoveRotation(180);
-//			} 
-//			else if(Input.GetKeyDown(mv.rightKey))
-//			{
-//				mv.rb2d.velocity = Vector2.right * mv.mSpeed;
-//				mv.rb2d.MoveRotation(270);
-//
-//			} 
-
 		}
 	}
 
@@ -100,12 +78,15 @@ public class GameController : MonoBehaviour {
 
 	public void GameOver()
 	{
+		
 		gameOverText.text = "Game Over";
 		restartText.text = "Press any key to restart!";
 		quitText.text = "Esc to quit";
 		mv.rb2d.velocity = Vector2.zero;
 		otherPlayer.GetComponent<GameController>().Pause();
 		gameOver = true;
+
+
 	}
 
 	public void Pause()
