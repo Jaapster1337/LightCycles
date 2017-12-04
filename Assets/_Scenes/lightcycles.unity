@@ -254,6 +254,11 @@ Prefab:
       propertyPath: restart
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114647642675366374, guid: fde14cdc952070448ab016cf15874c5a,
+        type: 2}
+      propertyPath: PoPickUp
+      value: 
+      objectReference: {fileID: 8300000, guid: 3048a99c0bbdf0741ba4574bff11cdbc, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fde14cdc952070448ab016cf15874c5a, type: 2}
   m_IsPrefabParent: 0
@@ -665,6 +670,11 @@ Prefab:
       propertyPath: deathSound
       value: 
       objectReference: {fileID: 8300000, guid: 27016803c9325934bbcb2b0e09a1c63e, type: 3}
+    - target: {fileID: 114277644552201146, guid: cd8440515552fd54b88a48d79687665d,
+        type: 2}
+      propertyPath: PoPickUp
+      value: 
+      objectReference: {fileID: 8300000, guid: 3048a99c0bbdf0741ba4574bff11cdbc, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd8440515552fd54b88a48d79687665d, type: 2}
   m_IsPrefabParent: 0
@@ -700,7 +710,7 @@ GameObject:
   - component: {fileID: 858498022}
   - component: {fileID: 858498021}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GAmeloop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,7 +727,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 425a762bcf9936e4e9e5ef65b3f9c106, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0

@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour {
 	public bool restart = false;
 	public bool pause=false;
 	public AudioClip deathSound;
+	public AudioClip PoPickUp;
 	Mover mv;
 	SoundController sc;
 
@@ -39,7 +40,7 @@ public class GameController : MonoBehaviour {
 		gameOverText.text = "";
 		restartText.text = "";
 		quitText.text = "";
-		InvokeRepeating("SpawnPowerUp", 10f, 10f);		
+		InvokeRepeating("SpawnPowerUp", 1f, 10f);		
 		
 	}
 	
@@ -84,7 +85,6 @@ public class GameController : MonoBehaviour {
 		quitText.text = "Esc to quit";
 		mv.rb2d.velocity = Vector2.zero;
 		AudioSource.PlayClipAtPoint(deathSound,transform.position);
-		//sc.PlaySound(deathSound,transform);
 		otherPlayer.GetComponent<GameController>().Pause();
 		gameOver = true;
 
@@ -98,8 +98,9 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void PowerUp()
-	{
+	{		
 		mv.mSpeed = mv.mSpeed * 2;
+		AudioSource.PlayClipAtPoint(PoPickUp,transform.position);
 	}
 
 	public void SpawnPowerUp()
