@@ -17,8 +17,7 @@ public class Mover : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	public void Move() {
-		
+	public void Move() {		
 		if(Input.GetKeyDown(upKey))
 		{
 			rb2d.velocity = Vector2.up * mSpeed;

@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour {
 	public bool gameOver = false;
 	public bool restart = false;
 	public bool pause=false;
+	public AudioClip deathSound;
 	Mover mv;
 	SoundController sc;
 
@@ -31,7 +32,6 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		mv = gameObject.GetComponent<Mover>();
 		mv.rb2d = GetComponent<Rigidbody2D>();
-		sc = gameObject.GetComponent<SoundController>();
 		transform.localEulerAngles = new Vector3(transform.localEulerAngles.x,transform.localEulerAngles.y,180f);
 		mv.rb2d.velocity = Vector2.down * mv.mSpeed;
 		gameOver = false;
@@ -83,6 +83,8 @@ public class GameController : MonoBehaviour {
 		restartText.text = "Press any key to restart!";
 		quitText.text = "Esc to quit";
 		mv.rb2d.velocity = Vector2.zero;
+		AudioSource.PlayClipAtPoint(deathSound,transform.position);
+		//sc.PlaySound(deathSound,transform);
 		otherPlayer.GetComponent<GameController>().Pause();
 		gameOver = true;
 

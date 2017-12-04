@@ -14,8 +14,8 @@ public class SoundController : MonoBehaviour {
 
 	}
 
-	public void PlaySound()
+	public void PlaySound(AudioClip clip, Transform position)
 	{
-		AudioSource.Play();
+		AudioSource.PlayClipAtPoint(deathSound,transform.position);
 	}
 }
